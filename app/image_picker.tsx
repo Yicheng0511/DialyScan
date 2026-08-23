@@ -1,12 +1,13 @@
 import Button from "@/components/Button_Main_Page";
 import ImageViewer from "@/components/Image_Viewer";
 import { launchImageLibraryAsync, } from "expo-image-picker";
-import { router, useGlobalSearchParams } from "expo-router";
+import { router, useGlobalSearchParams, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function Image_Picker() {
   const { imageUri } = useGlobalSearchParams<{imageUri: string}>();
+  const { Image_Type } = useLocalSearchParams<{Image_Type: string}>();
   const [selectedImage, setSelectedImage] = useState<string|undefined>(undefined);
 
   useEffect(() => {if (imageUri) {setSelectedImage(String(imageUri))}}, [imageUri]);
@@ -17,13 +18,19 @@ export default function Image_Picker() {
       allowsEditing: true,
       quality: 1
     });
-    !result.canceled && setSelectedImage(result.assets[0].uri)
+    if (!result.canceled) {
+      const asset = result.assets[0];
+      setSelectedImage(asset.uri);
+    }
   }
 
   const submitImage = () => {
-    if (selectedImage) {
+    if (Image_Type === "IR") {
       router.dismissAll();
-      router.replace({pathname: "/secretion_learning", params: {imageUri: selectedImage}});
+      router.replace({pathname: "/IR_infection_learning", params: {imageUri: selectedImage}});
+    } else if (Image_Type === "RGB") {
+      router.dismissAll();
+      router.replace({pathname: "/RGB_infection_learning", params: {imageUri: selectedImage}});
     } else {
       alert("No Image Selected");
     }

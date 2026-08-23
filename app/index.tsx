@@ -13,7 +13,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Image source={require("../assets/images/DialyScan-Logo.png")} style={styles.imageStyle} />
-      <Button label="Get Started" color="#ffffff" marginAbove={"10%"} onPress={() => {router.navigate("/image_picker")}} />
+      <Button label="Get Started" color="#ffffff" marginAbove={"10%"} onPress={() => {router.navigate("/ir")}} />
       <Button label="History Logs" color="#ffffff" marginAbove={"5%"} onPress={() => {router.navigate("/history")}} />
     </View>
   );

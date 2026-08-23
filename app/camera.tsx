@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 0,
         flexDirection: "column",
-        backgroundColor: "#000000",
+        backgroundColor: "#ffffff",
         width: "100%",
         height: 280,
         paddingHorizontal: 64,

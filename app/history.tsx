@@ -31,9 +31,8 @@ export default function History_Log() {
       {log.map((singleHistory: History) => {
         const imageDir = new Directory(Paths.document, "images");
         const imageFile = new File(imageDir, singleHistory.image);
-        const secretion = singleHistory.status === "Secretion";
-        const textStyle = secretion ? style.infected : style.notInfected;
-        const outcomeText = secretion ? "Likely Infected" : "Unlikely Infected";
+        const infection = singleHistory.status === "Infected";
+        const textStyle = infection ? style.infected : style.notInfected;
 
         return (
           <View key={singleHistory.image}>
@@ -52,9 +51,6 @@ export default function History_Log() {
                 </Text>
                 <Text style={style.rowText}>
                   Likelihood: <Text style={textStyle}>{singleHistory.likelihood}</Text>
-                </Text>
-                <Text style={style.rowText}>
-                  Outcome: <Text style={textStyle}>{outcomeText}</Text>
                 </Text>
               </View>
             </View>

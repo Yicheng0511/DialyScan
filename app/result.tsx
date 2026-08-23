@@ -6,26 +6,25 @@ import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Result() {
-  const { secretions, no_Secretions, imageUri } = useGlobalSearchParams<{
-    secretions: string,
-    no_Secretions: string,
+  const { infections, no_Infections, imageUri } = useGlobalSearchParams<{
+    infections: string,
+    no_Infections: string,
     imageUri: string
   }>();
 
-  const float_Secretions = Number(secretions);
-  const float_No_Secretions = Number(no_Secretions);
+  const float_Infections = Number(infections);
+  const float_No_Infections = Number(no_Infections);
   const date_Array = Date().split(" ")
   const time_Array = date_Array[4].split(":");
-  const isInfected = float_Secretions > float_No_Secretions;
+  const isInfected = float_Infections > float_No_Infections;
   const infectedStyle = isInfected ? style.infected : style.notInfected;
-  const infectedProb = isInfected ? `Secretions (${float_Secretions}%)` : `No secretions (${float_No_Secretions}%)`;
-  const infectedText = isInfected ? "Likely Infected" : "Unlikely Infected";
+  const infectedProb = isInfected ? `Infected (${float_Infections}%)` : `Not Infected (${float_No_Infections}%)`;
 
   const logDetails = {
     date: `${date_Array[2]} ${date_Array[1]} ${date_Array[3]}`,
     time: `${time_Array[0]}:${time_Array[1]}`,
-    status: float_Secretions > float_No_Secretions ? "Secretion" : "No secretion",
-    likelihood: `${float_Secretions}%`,
+    status: float_Infections > float_No_Infections ? "Infected" : "Not Infected",
+    likelihood: `${float_Infections}%`,
     image: imageUri.split("/").pop()
   };
 
@@ -65,9 +64,6 @@ export default function Result() {
       <View style={style.statusBar}>
         <Text style={style.textStyle}>Prediction Result:</Text>
         <Text style={infectedStyle}>{infectedProb}</Text>
-        <Text style={{fontSize: 24}}>
-          Outcome: <Text style={infectedStyle}>{infectedText}</Text> 
-        </Text>
       </View>
       <Button
         label="Go Back"

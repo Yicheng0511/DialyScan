@@ -5,7 +5,7 @@ const config = getDefaultConfig(__dirname);
 /** @type {import('expo/metro-config').MetroConfig} */
 const { assetExts, sourceExts } = config.resolver;
 
-config.resolver.assetExts = [...assetExts, "bin"];
+config.resolver.assetExts = [...assetExts, "bin", "wasm"];
 // Optional: Ensure 'bin' isn't accidentally in sourceExts
 config.resolver.sourceExts = sourceExts.filter(ext => ext !== "bin");
 
